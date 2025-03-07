@@ -32,10 +32,10 @@ pip install -r requirements.txt
 ## Usage
 
 1. **Training the Model**:  
-   Run the `train.py` script to train the model with the predefined dataset of 10x10 pixel characters.
+   Run the `main.py` script to train the model with the predefined dataset of 10x10 pixel characters.
 
    ```bash
-   python train.py
+   python main.py
    ```
 
 2. **Inference**:  
@@ -47,10 +47,9 @@ pip install -r requirements.txt
 
 ## Code Structure
 
-- `train.py`: The main script to train the model and generate visualizations.
-- `data/`: Folder containing the dataset (training and testing images).
-- `model.py`: Contains the machine learning model architecture and training functions.
-- `utils.py`: Utility functions for data preprocessing and visualization.
+- `main.py`: The main script to train the model and generate visualizations.
+- `Images/`: Folder containing the dataset (training and testing images).
+- `multiclass.py`: Contains the machine learning model architecture and training functions.
 
 ## Example Output
 
