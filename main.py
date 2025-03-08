@@ -1,67 +1,15 @@
-from matplotlib import pyplot as plt
-from multiclass import multi
-from multiclass import softmax
-from multiclass import sigmoid
-from teste import load_img
-from teste import load_img_if
 import numpy as np
 import math
 import time
 import seaborn as sn
 import pandas as pd
+from matplotlib import pyplot as plt
+from multiclass import multi, softmax, sigmoid
+from teste import load_training_imgs, load_inference_imgs
+
 start_time = time.time()
-# X1 = [[[0, 0, 1, 0, 0],
-#        [0, 1, 1, 0, 0],
-#        [0, 0, 1, 0, 0],
-#        [0, 0, 1, 0, 0],
-#        [0, 1, 1, 1, 0]],
-#       [[1, 1, 1, 1, 0],
-#        [0, 0, 0, 0, 1],
-#        [0, 1, 1, 1, 0],
-#        [1, 0, 0, 0, 0],
-#        [1, 1, 1, 1, 1]],
-#       [[1, 1, 1, 1, 0],
-#        [0, 0, 0, 0, 1],
-#        [0, 1, 1, 1, 0],
-#        [0, 0, 0, 0, 1],
-#        [1, 1, 1, 1, 0]],
-#       [[0, 0, 0, 1, 0],
-#        [0, 0, 1, 1, 0],
-#        [0, 1, 0, 1, 0],
-#        [1, 1, 1, 1, 1],
-#        [0, 0, 0, 1, 0]]]
 
-# X01 = [[0, 0, 1, 0, 0],
-#       [0, 1, 1, 0, 0],
-#       [0, 0, 0, 0, 0],
-#       [0, 0, 1, 0, 0],
-#       [0, 1, 1, 1, 0]]
-
-# X01 = [[1, 1, 1, 1, 1],
-#        [1, 0, 0, 0, 1],
-#        [1, 0, 0, 0, 1],
-#        [1, 0, 0, 0, 1],
-#        [1, 1, 1, 1, 1]]
-#
-# X02 = [[1, 1, 1, 1, 0],
-#        [0, 0, 0, 0, 1],
-#        [0, 0, 1, 1, 0],
-#        [1, 0, 0, 0, 0],
-#        [1, 1, 1, 1, 1]]
-#
-# X03 = [[1, 1, 1, 1, 0],
-#        [0, 0, 0, 1, 1],
-#        [0, 0, 1, 1, 1],
-#        [0, 0, 0, 1, 1],
-#        [1, 1, 1, 1, 0]]
-#
-# X04 = [[0, 0, 0, 0, 1],
-#        [0, 0, 1, 0, 1],
-#        [0, 1, 0, 0, 1],
-#        [1, 1, 1, 1, 1],
-#        [0, 0, 0, 0, 1]]
-
-X = load_img()
+X = load_training_imgs()
 f, axarr = plt.subplots(2, 5)
 axarr[0, 0].imshow(X[0])
 axarr[0, 1].imshow(X[1])
@@ -74,7 +22,7 @@ axarr[1, 2].imshow(X[7])
 axarr[1, 3].imshow(X[8])
 axarr[1, 4].imshow(X[9])
 
-X0 = load_img_if()
+X0 = load_inference_imgs()
 fig, ax = plt.subplots(1, 5)
 ax[0].imshow(X0[0])
 ax[1].imshow(X0[1])
