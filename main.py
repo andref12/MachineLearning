@@ -5,108 +5,95 @@ import seaborn as sn
 import pandas as pd
 from matplotlib import pyplot as plt
 from multiclass import multi, softmax, sigmoid
-from teste import load_training_imgs, load_inference_imgs
+from load_img import load_training_imgs, load_inference_imgs
 
 start_time = time.time()
 
-X = load_training_imgs()
+#Plot training images
+training_imgs = load_training_imgs()
 f, axarr = plt.subplots(2, 5)
-axarr[0, 0].imshow(X[0])
-axarr[0, 1].imshow(X[1])
-axarr[0, 2].imshow(X[2])
-axarr[0, 3].imshow(X[3])
-axarr[0, 4].imshow(X[4])
-axarr[1, 0].imshow(X[5])
-axarr[1, 1].imshow(X[6])
-axarr[1, 2].imshow(X[7])
-axarr[1, 3].imshow(X[8])
-axarr[1, 4].imshow(X[9])
+axarr[0, 0].imshow(training_imgs[0])
+axarr[0, 1].imshow(training_imgs[1])
+axarr[0, 2].imshow(training_imgs[2])
+axarr[0, 3].imshow(training_imgs[3])
+axarr[0, 4].imshow(training_imgs[4])
+axarr[1, 0].imshow(training_imgs[5])
+axarr[1, 1].imshow(training_imgs[6])
+axarr[1, 2].imshow(training_imgs[7])
+axarr[1, 3].imshow(training_imgs[8])
+axarr[1, 4].imshow(training_imgs[9])
 
-X0 = load_inference_imgs()
+#Plot inference images
+inference_imgs = load_inference_imgs()
 fig, ax = plt.subplots(1, 5)
-ax[0].imshow(X0[0])
-ax[1].imshow(X0[1])
-ax[2].imshow(X0[2])
-ax[3].imshow(X0[3])
-ax[4].imshow(X0[4])
+ax[0].imshow(inference_imgs[0])
+ax[1].imshow(inference_imgs[1])
+ax[2].imshow(inference_imgs[2])
+ax[3].imshow(inference_imgs[3])
+ax[4].imshow(inference_imgs[4])
 
-# treinamento
-a = [1, 2, 3, 4, 5, 6, 7]
+#Training
+n_epochs = 7
+epochs_list = list(range(1,n_epochs+1))
+#Initializing Network with Random Weights
+n_pixels = 100
+n_hidden_layer_nodes = 50
+n_possible_outputs = 5
 rng = np.random.default_rng(12345)
-W1 = rng.random(size=(50, 100))
-W1 = 2*W1 - 1
-W2 = rng.random(size=(5, 50))
-W2 = 2*W2 - 1
-med_err = np.zeros(len(a))
-for r in range(1, len(a)+1):
-    epoch = math.factorial(a[r-1])
+weights_1 = rng.random(size=(n_hidden_layer_nodes, n_pixels))
+weights_1 = 2*weights_1 - 1
+weights_2 = rng.random(size=(n_possible_outputs, n_hidden_layer_nodes))
+weights_2 = 2*weights_2 - 1
+med_err = np.zeros(len(epochs_list))
+for r in range(1, len(epochs_list)+1):
+    epoch = math.factorial(epochs_list[r-1])
     for ii in range(0, epoch):
-        W1, W2, er = multi(W1, W2, X)
+        weights_1, weights_2, er = multi(weights_1, weights_2, training_imgs)
     sss = abs(er)
     med_err[r-1] = np.mean(sss)
 
-eph = np.zeros(len(a))
-for iii in range(1, len(a)+1):
-    eph[iii-1] = math.factorial(a[iii-1])
+eph = np.zeros(len(epochs_list))
+for iii in range(1, len(epochs_list)+1):
+    eph[iii-1] = math.factorial(epochs_list[iii-1])
 
 figure, ax1 = plt.subplots()
 ax1.set_xscale("log")
 ax1.set_yscale("log")
-ax1.set_ylabel('Taxa de erro')
-ax1.set_xlabel('Epoca')
+ax1.set_ylabel('Error Rate')
+ax1.set_xlabel('Epoch')
 ax1.plot(eph, med_err)
 
-# inferencia
-
+#Inference
 N_1 = [1, 2, 3, 4, 5]
-x_1 = np.reshape(X0[0], 100)
-v_11 = np.matmul(W1, x_1)
-y1 = np.zeros((len(v_11)))
-for ii in range(0, (len(v_11))):
-    y1[ii] = sigmoid(v_11[ii])
-vv = np.matmul(W2, y1)
-yy = softmax(vv)
 
-x_1 = np.reshape(X0[1], 100)
-v_11 = np.matmul(W1, x_1)
-for ii in range(0, (len(v_11))):
-    y1[ii] = sigmoid(v_11[ii])
-vv = np.matmul(W2, y1)
-yy2 = softmax(vv)
+def inference(weights_1, weights_2, inference_img):
+    x_1 = np.reshape(inference_img, 100)
+    v_11 = np.matmul(weights_1, x_1)
+    y1 = np.zeros((len(v_11)))
+    for ii in range(0, (len(v_11))):
+        y1[ii] = sigmoid(v_11[ii])
+    vv = np.matmul(weights_2, y1)
+    yy = softmax(vv)
+    return yy
 
-x_1 = np.reshape(X0[2], 100)
-v_11 = np.matmul(W1, x_1)
-for ii in range(0, (len(v_11))):
-    y1[ii] = sigmoid(v_11[ii])
-vv = np.matmul(W2, y1)
-yy3 = softmax(vv)
-
-x_1 = np.reshape(X0[3], 100)
-v_11 = np.matmul(W1, x_1)
-for ii in range(0, (len(v_11))):
-    y1[ii] = sigmoid(v_11[ii])
-vv = np.matmul(W2, y1)
-yy4 = softmax(vv)
-
-x_1 = np.reshape(X0[4], 100)
-v_11 = np.matmul(W1, x_1)
-for ii in range(0, (len(v_11))):
-    y1[ii] = sigmoid(v_11[ii])
-vv = np.matmul(W2, y1)
-yy5 = softmax(vv)
+inference_result_img_1 = inference(weights_1, weights_2, inference_imgs[0])
+inference_result_img_2 = inference(weights_1, weights_2, inference_imgs[1])
+inference_result_img_3 = inference(weights_1, weights_2, inference_imgs[2])
+inference_result_img_4 = inference(weights_1, weights_2, inference_imgs[3])
+inference_result_img_5 = inference(weights_1, weights_2, inference_imgs[4])
 
 fi, ax2 = plt.subplots(1, 5)
-ax2[0].bar(N_1, yy)
-ax2[1].bar(N_1, yy2)
-ax2[2].bar(N_1, yy3)
-ax2[3].bar(N_1, yy4)
-ax2[4].bar(N_1, yy5)
+ax2[0].bar(N_1, inference_result_img_1)
+ax2[1].bar(N_1, inference_result_img_2)
+ax2[2].bar(N_1, inference_result_img_3)
+ax2[3].bar(N_1, inference_result_img_4)
+ax2[4].bar(N_1, inference_result_img_5)
 
-conf = np.concatenate((yy, yy2, yy3, yy4, yy5), axis=0)
-conf = np.reshape(conf, (5, 5))
+inference_result = np.concatenate((inference_result_img_1, inference_result_img_2, inference_result_img_3, inference_result_img_4, inference_result_img_5), axis=0)
+inference_result = np.reshape(inference_result, (5, 5))
 figura, a = plt.subplots()
-df_cm = pd.DataFrame(conf, range(5), range(5))
-a.set_title('Matriz de Confusão')
+df_cm = pd.DataFrame(inference_result, range(5), range(5))
+a.set_title('Confusion Matrix')
 sn.set(font_scale=1.4)
 sn.heatmap(df_cm, annot=True, annot_kws={"size": 25})
 
