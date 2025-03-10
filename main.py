@@ -48,7 +48,7 @@ med_err = np.zeros(len(epochs_list))
 for r in range(1, len(epochs_list)+1):
     epoch = math.factorial(epochs_list[r-1])
     for ii in range(0, epoch):
-        weights_1, weights_2, er = multi(weights_1, weights_2, training_imgs)
+        weights_1, weights_2, er = multi(weights_1, weights_2, training_imgs, [0,0,1,1,2,2,3,3,4,4])
     sss = abs(er)
     med_err[r-1] = np.mean(sss)
 
