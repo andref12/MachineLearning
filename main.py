@@ -67,7 +67,10 @@ ax1.plot(eph, med_err)
 N_1 = [1, 2, 3, 4, 5]
 
 def inference(weights_1, weights_2, inference_img):
-    x_1 = np.reshape(inference_img, 100)
+    height_pxls = np.size(inference_img,0)
+    width_pxls = np.size(inference_img,1)
+    n_pixels = height_pxls * width_pxls
+    x_1 = np.reshape(inference_img, n_pixels)
     v_11 = np.matmul(weights_1, x_1)
     y1 = np.zeros((len(v_11)))
     for ii in range(0, (len(v_11))):
