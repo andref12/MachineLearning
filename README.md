@@ -17,17 +17,18 @@ This project implements a character recognition system using a simple machine le
 
 ## Installation
 
-To use this project, make sure to have Python 3.x installed along with the necessary libraries. You can install the required libraries using the following command:
+To use this project, make sure to have Python 3.12.2 installed along with the necessary libraries. You can install the required libraries using the following command:
 
 ```bash
 pip install -r requirements.txt
 ```
 
 ### Requirements
-- Python 3.x
+- Python 3.12.2
+- Seaborn
+- Pandas
 - NumPy
 - Matplotlib
-- Scikit-learn
 
 ## Usage
 
@@ -52,6 +53,8 @@ pip install -r requirements.txt
 - `multiclass.py`: Contains the machine learning model architecture and training functions.
 
 ## Example Output
+
+![image](https://github.com/user-attachments/assets/a5738769-d99d-4c3c-a5b9-220da5689268)
 
 ### Learning Curve
 
