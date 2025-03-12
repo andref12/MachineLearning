@@ -55,11 +55,3 @@ pip install -r requirements.txt
 ## Example Output
 
 ![image](https://github.com/user-attachments/assets/a5738769-d99d-4c3c-a5b9-220da5689268)
-
-### Learning Curve
-
-After training, a plot showing the learning curve will appear, depicting the model's accuracy over time as it learns.
-
-### Confusion Matrix
-
-The confusion matrix will be displayed in the terminal or saved to a file, providing insights into how well the model is performing across different classes.
