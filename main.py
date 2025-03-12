@@ -32,6 +32,8 @@ ax[2].imshow(inference_imgs[2])
 ax[3].imshow(inference_imgs[3])
 ax[4].imshow(inference_imgs[4])
 
+training_imgs_labels = [0,0,1,1,2,2,3,3,4,4]
+
 #Training
 n_epochs = 7
 epochs_list = list(range(1,n_epochs+1))
@@ -48,7 +50,7 @@ med_err = np.zeros(len(epochs_list))
 for r in range(1, len(epochs_list)+1):
     epoch = math.factorial(epochs_list[r-1])
     for ii in range(0, epoch):
-        weights_1, weights_2, er = multi(weights_1, weights_2, training_imgs, [0,0,1,1,2,2,3,3,4,4])
+        weights_1, weights_2, er = multi(weights_1, weights_2, training_imgs, training_imgs_labels)
     sss = abs(er)
     med_err[r-1] = np.mean(sss)
 
