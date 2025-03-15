@@ -5,7 +5,7 @@ This Python-based machine learning algorithm is designed to recognize a limited 
 ## Overview
 
 This project implements a character recognition system using a simple machine learning model. The algorithm is trained on 10x10 pixel images representing characters and then evaluated using slightly altered test images to assess the model's generalization ability. After training, the following outputs are generated:
-- Learning curve graph
+- Learning curve
 - Confusion matrix
 
 ## Features
