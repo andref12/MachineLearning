@@ -24,7 +24,7 @@ pip install -r requirements.txt
 ```
 
 ### Requirements
-- Python 3.12.2
+- Python 3.12
 - Seaborn
 - Pandas
 - NumPy
